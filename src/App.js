@@ -1,11 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from './images/logo.svg';
+
 
 function App() {
   return (
-   <>
+   <div className='root'>
      <header className="header">
-       <img className="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип"/>
+       <img className="header__logo" src={logo} alt="Логотип"/>
      </header>
 
      <main className="main conteiner">
@@ -18,8 +18,8 @@ function App() {
 
          <div className="profile__info">
            <div className="profile__capion">
-             <h1 className="profile__name"></h1>
-             <p className="profile__profession"></p>
+             <h1 className="profile__name">Жак-Ив Кусто</h1>
+             <p className="profile__profession">Иследователь океана</p>
            </div>
            <button
                type="button"
@@ -172,7 +172,7 @@ function App() {
          <button className="card__trash card__trash_hidden link"></button>
        </li>
      </template>
-   </>
+   </div>
   );
 }
 
