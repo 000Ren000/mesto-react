@@ -1,45 +1,14 @@
-import logo from './images/logo.svg';
-
+import Header from './Header.js';
+import Main from './Main.js';
+import Footer from './Footer.js';
 
 function App() {
   return (
    <div className='root'>
-     <header className="header">
-       <img className="header__logo" src={logo} alt="Логотип"/>
-     </header>
+    <Header />
 
-     <main className="main conteiner">
-       <section className="profile">
-         <div className="profile__avatar-container">
-           <img
-               className="profile__avatar"
-               alt="Фото профиля"/>
-         </div>
-
-         <div className="profile__info">
-           <div className="profile__capion">
-             <h1 className="profile__name">Жак-Ив Кусто</h1>
-             <p className="profile__profession">Иследователь океана</p>
-           </div>
-           <button
-               type="button"
-               className="profile__edit-button link"
-           >
-           </button>
-         </div>
-         <button
-             type="button"
-             className="profile__add-button link"
-         ></button>
-       </section>
-       <section className="photo">
-         <ul className="photo__cards">
-         </ul>
-       </section>
-     </main>
-     <footer className="footer conteiner">
-       <p className="footer__text">&copy; 2020 Mesto Russia</p>
-     </footer>
+    <Main />
+     <Footer />
 
      <div className="popup popup_opacity_mid" id="edit-form">
        <div className="popup__conteiner">
@@ -111,7 +80,7 @@ function App() {
 
      <div className="popup popup_opacity_hard" id="image-popup">
        <div className="popup__image-conteiner">
-         <img src="#" alt="" className="popup__image"/>
+         <img src="src/components/App.js#" alt="" className="popup__image"/>
            <p className="popup__image-description"></p>
            <button className="popup__button-close link"></button>
        </div>
@@ -160,7 +129,7 @@ function App() {
      <template id="photo__card">
        <li className="card">
          <div className="card__border-image">
-           <img src="#" className="card__image" alt=""/>
+           <img src="src/components/App.js#" className="card__image" alt=""/>
          </div>
          <div className="card__description">
            <h2 className="card__title"></h2>
