@@ -1,11 +1,26 @@
 export default function Main() {
+	const handleEditAvatarClick = () => {
+		const avatar = document.querySelector('#popup-avatar');
+		avatar.classList.add('popup_opened');
+	}
+	const handleEditProfileClick = () => {
+		const profile = document.querySelector('#edit-form');
+		profile.classList.add('popup_opened');
+	}
+	const  handleAddPlaceClick = () => {
+		const addPlace = document.querySelector('#add-Form');
+		addPlace.classList.add('popup_opened');
+	}
 	return (
+
 			<main className="main conteiner">
 				<section className="profile">
-					<div className="profile__avatar-container">
+					<div className="profile__avatar-container"
+					     onClick={handleEditAvatarClick}>
 						<img
 								className="profile__avatar"
-								alt="Фото профиля"/>
+								alt="Фото профиля"
+						/>
 					</div>
 
 					<div className="profile__info">
@@ -16,12 +31,14 @@ export default function Main() {
 						<button
 								type="button"
 								className="profile__edit-button link"
+								onClick={handleEditProfileClick}
 						>
 						</button>
 					</div>
 					<button
 							type="button"
 							className="profile__add-button link"
+							onClick={handleAddPlaceClick}
 					></button>
 				</section>
 				<section className="photo">
