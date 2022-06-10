@@ -1,7 +1,8 @@
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
-
+import PopupWithForm from'./PopupWithForm.js'
+import ImagePopup from './ImagePopup.js';
 function App() {
   return (
    <div className='root'>
@@ -9,103 +10,66 @@ function App() {
 
     <Main />
      <Footer />
+    <PopupWithForm title="Редактировать профиль" name='edit-form' children={
+        <form name="editForm" className="edit-form" noValidate>
+          <input name="name"
+                 type="text"
+                 className="edit-form__input edit-form__input_type_name"
+                 id="input-profile-name"
+                 minLength="2"
+                 maxLength="40"
+                 required
+          />
+          <span className="popup__error" id="input-profile-name-error"></span>
+          <input name="about"
+                 type="text"
+                 className="edit-form__input edit-form__input_type_profession"
+                 id="input-profession"
+                 minLength="2"
+                 maxLength="200"
+                 required
+          />
+          <span className="popup__error" id="input-profession-error"></span>
+          <button
+              type="submit"
+              className="edit-form__button-save"
+          >Сохранить
+          </button
+          >
+        </form>
+    }/>
 
-     <div className="popup popup_opacity_mid" id="edit-form">
-       <div className="popup__conteiner">
+     <PopupWithForm title="Новое место" name='add-Form' children={
+       <form name="editForm" className="edit-form" noValidate>
+         <input name="name"
+                id="input-name"
+                placeholder="Название"
+                type="text"
+                className="edit-form__input edit-form__input_type_name "
+                minLength="2"
+                maxLength="30"
+                required
+         />
+         <span className="popup__error" id="input-name-error"></span>
+         <input name="link"
+                id="input-link"
+                placeholder="Ссылка на картинку"
+                type="url"
+                className="edit-form__input edit-form__input_type_link"
+                required
+         />
+         <span className="popup__error" id="input-link-error"></span>
+         <button
+             type="submit"
+             className="edit-form__button-save"
+         >Создать
+         </button
+         >
+       </form>
+     }/>
+
+     <PopupWithForm title="Обновить аватар" name='add-Form' children={
          <form name="editForm" className="edit-form" noValidate>
-           <h2 className="edit-form__title">Редактировать профиль</h2>
-           <input name="name"
-                  type="text"
-                  className="edit-form__input edit-form__input_type_name"
-                  id="input-profile-name"
-                  minLength="2"
-                  maxLength="40"
-                  required
-           />
-           <span className="popup__error" id="input-profile-name-error"></span>
-           <input name="about"
-                  type="text"
-                  className="edit-form__input edit-form__input_type_profession"
-                  id="input-profession"
-                  minLength="2"
-                  maxLength="200"
-                  required
-           />
-           <span className="popup__error" id="input-profession-error"></span>
-           <button
-               type="submit"
-               className="edit-form__button-save"
-           >Сохранить
-           </button
-           >
-         </form>
-         <button type="button" aria-label="Закрыть"
-                 className="popup__button-close link"></button>
-       </div>
-     </div>
-
-     <div className="popup popup_opacity_mid" id="add-Form">
-       <div className="popup__conteiner">
-         <form name="editForm" className="edit-form" noValidate>
-           <h2 className="edit-form__title">Новое место</h2>
-           <input name="name"
-                  id="input-name"
-                  placeholder="Название"
-                  type="text"
-                  className="edit-form__input edit-form__input_type_name "
-                  minLength="2"
-                  maxLength="30"
-                  required
-           />
-           <span className="popup__error" id="input-name-error"></span>
-           <input name="link"
-                  id="input-link"
-                  placeholder="Ссылка на картинку"
-                  type="url"
-                  className="edit-form__input edit-form__input_type_link"
-                  required
-           />
-           <span className="popup__error" id="input-link-error"></span>
-           <button
-               type="submit"
-               className="edit-form__button-save"
-           >Создать
-           </button
-           >
-         </form>
-         <button type="button" aria-label="Закрыть"
-                 className="popup__button-close link"></button>
-       </div>
-     </div>
-
-     <div className="popup popup_opacity_hard" id="image-popup">
-       <div className="popup__image-conteiner">
-         <img src="src/components/App.js#" alt="" className="popup__image"/>
-           <p className="popup__image-description"></p>
-           <button className="popup__button-close link"></button>
-       </div>
-     </div>
-
-     <div className="popup popup_opacity_mid" id="popup-confirmation">
-       <div className="popup__conteiner popup__conteiner_minimize">
-         <form name="editForm" className="edit-form" noValidate>
-           <h2 className="edit-form__title edit-form__title_minimize">Вы уверены</h2>
-           <button
-               type="submit"
-               className="edit-form__button-save"
-           >Да
-           </button
-           >
-         </form>
-         <button type="button" aria-label="Закрыть"
-                 className="popup__button-close link"></button>
-       </div>
-     </div>
-
-     <div className="popup popup_opacity_mid" id="popup-avatar">
-       <div className="popup__conteiner popup__conteiner_minimize">
-         <form name="editForm" className="edit-form" noValidate>
-           <h2 className="edit-form__title ">Обновить аватар</h2>
            <input name="link"
                   id="input-avatar"
                   placeholder="Ссылка на картинку"
@@ -121,10 +85,20 @@ function App() {
            </button
            >
          </form>
-         <button type="button" aria-label="Закрыть"
-                 className="popup__button-close link"></button>
-       </div>
-     </div>
+     }/>
+     <PopupWithForm title="Вы уверены?" name='add-Form' children={
+       <form name="editForm" className="edit-form" noValidate>
+         <button
+             type="submit"
+             className="edit-form__button-save"
+         >Да
+         </button
+         >
+       </form>
+     }/>
+
+     <ImagePopup />
+
 
      <template id="photo__card">
        <li className="card">
