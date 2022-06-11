@@ -3,12 +3,23 @@ import Main from './Main.js';
 import Footer from './Footer.js';
 import PopupWithForm from'./PopupWithForm.js'
 import ImagePopup from './ImagePopup.js';
+import {useState} from 'react';
 function App() {
+
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false)
+  const [isAddPlacePopupOpen, setAddPlacePopupOpen ] = useState(false);
+  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
+
+  const handleEditAvatarClick = () => setEditAvatarPopupOpen(true);
+  const handleEditProfileClick = () => setEditProfilePopupOpen(true);
+  const  handleAddPlaceClick = () => setAddPlacePopupOpen(true);
+
+
   return (
    <div className='root'>
     <Header />
 
-    <Main />
+    <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} />
      <Footer />
     <PopupWithForm title="Редактировать профиль" name='edit-form' children={
         <form name="editForm" className="edit-form" noValidate>
@@ -37,7 +48,8 @@ function App() {
           </button
           >
         </form>
-    }/>
+    } isOpen={isEditProfilePopupOpen}
+    />
 
      <PopupWithForm title="Новое место" name='add-Form' children={
        <form name="editForm" className="edit-form" noValidate>
@@ -66,7 +78,7 @@ function App() {
          </button
          >
        </form>
-     }/>
+     } isOpen={isAddPlacePopupOpen} />
 
      <PopupWithForm title="Обновить аватар" name='add-Form' children={
          <form name="editForm" className="edit-form" noValidate>
@@ -85,7 +97,7 @@ function App() {
            </button
            >
          </form>
-     }/>
+     } isOpen={isEditAvatarPopupOpen} />
      <PopupWithForm title="Вы уверены?" name='add-Form' children={
        <form name="editForm" className="edit-form" noValidate>
          <button

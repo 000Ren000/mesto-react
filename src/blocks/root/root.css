@@ -8,4 +8,6 @@
   align-items: center;
   font-family: Inter, "Helvetica Neue", Arial, sans-serif;
   color: #fff;
+  min-height: 100vh;
+  justify-content: space-between;
 }
