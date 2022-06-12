@@ -1,32 +1,42 @@
 import {useEffect, useState} from 'react';
 import {api} from '../utils/Api.js';
-export default function Main(
-		{onEditProfile,
-		onEditAvatar,
-		onAddPlace}
-) {
-	let userId;
-	const [userName, setUserName] = useState()
-	const [userDescription, setUserDescription] = useState()
-	const [userAvatar, setUserAvatar ] = useState()
+import Cards from './Cards.js';
 
-	// Promise.all([
-	// 	api.getProfileinfo(),
-	// 	api.getCardInfo()
-	// ]).then(([userData, cards]) => {
-	// 	userId = userData._id;
-	// 	console.log(userId);
-	// 	console.log(userData);
-	// 	console.log(cards);
-	// }).catch(err => console.log('что-то пошло не так', err));
+export default function Main(
+		{
+			onEditProfile,
+			onEditAvatar,
+			onAddPlace
+		}
+) {
+
+	const [userName, setUserName] = useState();
+	const [userDescription, setUserDescription] = useState();
+	const [userAvatar, setUserAvatar] = useState();
+	const [cards, setCards] = useState([]);
+	const [myId, setMyId] =useState()
 
 	useEffect(() => {
-			api.getProfileinfo().then((userData) => {
-				setUserName(userData.name);
-				setUserDescription(userData.about);
-				setUserAvatar(userData.avatar);
+		api.getProfileinfo().then((userData) => {
+			setUserName(userData.name);
+			setUserDescription(userData.about);
+			setUserAvatar(userData.avatar);
+			setMyId(userData._id);
 		}).catch(err => console.log('что-то пошло не так', err));
-	}, [])
+	}, []);
+
+	useEffect(() => {
+		api.getCardInfo().then(data => {
+			setCards(data.map(item => ({
+				likes: item.likes,
+				link: item.link,
+				name: item.name,
+				key: item._id
+			})
+			));
+		})
+				.catch(err => console.log('что-то пошло не так', err));
+	}, []);
 
 	return (
 
@@ -36,7 +46,7 @@ export default function Main(
 					     onClick={onEditAvatar}>
 						<div
 								className="profile__avatar"
-								style={{ backgroundImage: `url(${userAvatar})` }}
+								style={{backgroundImage: `url(${userAvatar})`}}
 						/>
 					</div>
 
@@ -60,6 +70,7 @@ export default function Main(
 				</section>
 				<section className="photo">
 					<ul className="photo__cards">
+						{cards.map(card => <Cards {...card} myId={myId}/>)}
 					</ul>
 				</section>
 			</main>
