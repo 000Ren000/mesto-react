@@ -13,7 +13,11 @@ function App() {
   const handleEditAvatarClick = () => setEditAvatarPopupOpen(true);
   const handleEditProfileClick = () => setEditProfilePopupOpen(true);
   const  handleAddPlaceClick = () => setAddPlacePopupOpen(true);
-
+  const closeAllPopups = () => {
+    setEditAvatarPopupOpen(false);
+    setEditProfilePopupOpen(false);
+    setAddPlacePopupOpen(false);
+  }
 
   return (
    <div className='root'>
@@ -49,6 +53,7 @@ function App() {
           >
         </form>
     } isOpen={isEditProfilePopupOpen}
+                   onClose={closeAllPopups}
     />
 
      <PopupWithForm title="Новое место" name='add-Form' children={
@@ -78,7 +83,10 @@ function App() {
          </button
          >
        </form>
-     } isOpen={isAddPlacePopupOpen} />
+     }
+                    isOpen={isAddPlacePopupOpen}
+                    onClose={closeAllPopups}
+     />
 
      <PopupWithForm title="Обновить аватар" name='add-Form' children={
          <form name="editForm" className="edit-form" noValidate>
@@ -97,7 +105,10 @@ function App() {
            </button
            >
          </form>
-     } isOpen={isEditAvatarPopupOpen} />
+     }
+                    isOpen={isEditAvatarPopupOpen}
+                    onClose={closeAllPopups}
+     />
      <PopupWithForm title="Вы уверены?" name='add-Form' children={
        <form name="editForm" className="edit-form" noValidate>
          <button
@@ -107,7 +118,9 @@ function App() {
          </button
          >
        </form>
-     }/>
+     }
+                    onClose={closeAllPopups}
+     />
 
      <ImagePopup />
 
