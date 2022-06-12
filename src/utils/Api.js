@@ -1,3 +1,4 @@
+import {key} from './utils.js';
 class Api {
   constructor(option) {
     this._baseURL = option.baseURL;
