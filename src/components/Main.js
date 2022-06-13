@@ -6,7 +6,8 @@ export default function Main(
 		{
 			onEditProfile,
 			onEditAvatar,
-			onAddPlace
+			onAddPlace,
+			onCardClick
 		}
 ) {
 
@@ -70,7 +71,7 @@ export default function Main(
 				</section>
 				<section className="photo">
 					<ul className="photo__cards">
-						{cards.map(card => <Cards {...card} myId={myId}/>)}
+						{cards.map(card => <Cards card={card} key={card.key} onCardClick={onCardClick} />)}
 					</ul>
 				</section>
 			</main>

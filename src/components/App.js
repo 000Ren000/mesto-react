@@ -9,6 +9,7 @@ function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setAddPlacePopupOpen ] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(false);
 
   const handleEditAvatarClick = () => setEditAvatarPopupOpen(true);
   const handleEditProfileClick = () => setEditProfilePopupOpen(true);
@@ -17,13 +18,18 @@ function App() {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
+    setSelectedCard(false)
   }
 
   return (
    <div className='root'>
     <Header />
 
-    <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} />
+     <Main onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
+          onCardClick={setSelectedCard}
+    />
      <Footer />
     <PopupWithForm title="Редактировать профиль" name='edit-form' children={
         <form name="editForm" className="edit-form" noValidate>
@@ -122,24 +128,8 @@ function App() {
                     onClose={closeAllPopups}
      />
 
-     <ImagePopup />
+     <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
 
-
-     <template id="photo__card">
-       <li className="card">
-         <div className="card__border-image">
-           <img src="src/components/App.js#" className="card__image" alt=""/>
-         </div>
-         <div className="card__description">
-           <h2 className="card__title"></h2>
-           <div className="card__like-container">
-             <button type="button" className="card__button-like"></button>
-             <span className="card__like-counter"></span>
-           </div>
-         </div>
-         <button className="card__trash card__trash_hidden link"></button>
-       </li>
-     </template>
    </div>
   );
 }

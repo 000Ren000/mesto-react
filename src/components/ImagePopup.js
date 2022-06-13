@@ -1,10 +1,13 @@
-export default function ImagePopup () {
+export default function ImagePopup ({card, onClose}) {
+	const {name, link} = card;
 	return (
-			<div className="popup popup_opacity_hard" id="image-popup">
+			<div className={`popup popup_opacity_hard ${card ? 'popup_opened' : ''}`}
+			     id="image-popup">
 				<div className="popup__image-conteiner">
-					<img src="src/components/App.js#" alt="" className="popup__image"/>
-					<p className="popup__image-description"></p>
-					<button className="popup__button-close link"></button>
+					<img src={link} alt={name} className="popup__image"/>
+					<p className="popup__image-description">{name}</p>
+					<button className="popup__button-close link"
+					onClick={onClose}></button>
 				</div>
 			</div>
 	)
