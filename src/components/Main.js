@@ -71,7 +71,7 @@ export default function Main(
 				</section>
 				<section className="photo">
 					<ul className="photo__cards">
-						{cards.map(card => <Cards card={card} key={card.key} onCardClick={onCardClick} />)}
+						{cards.map(card => (<Cards card={card} key={card.key} onCardClick={onCardClick} />))}
 					</ul>
 				</section>
 			</main>
