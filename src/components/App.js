@@ -6,19 +6,19 @@ import ImagePopup from './ImagePopup.js';
 import {useState} from 'react';
 function App() {
 
-  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false)
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setAddPlacePopupOpen ] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({name: '', link: ''});
 
   const handleEditAvatarClick = () => setEditAvatarPopupOpen(true);
-  const handleEditProfileClick = () => setEditProfilePopupOpen(true);
+  const handleEditProfileClick = () => setIsEditProfilePopupOpen(true);
   const  handleAddPlaceClick = () => setAddPlacePopupOpen(true);
   const closeAllPopups = () => {
     setEditAvatarPopupOpen(false);
-    setEditProfilePopupOpen(false);
+    setIsEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
-    setSelectedCard(false)
+    setSelectedCard({name: '', link: ''});
   }
 
   return (
@@ -32,8 +32,8 @@ function App() {
     />
      <Footer />
     <PopupWithForm title="Редактировать профиль" name='edit-form' children={
-        <form name="editForm" className="edit-form" noValidate>
-          <input name="name"
+      <>
+      <input name="name"
                  type="text"
                  className="edit-form__input edit-form__input_type_name"
                  id="input-profile-name"
@@ -51,20 +51,16 @@ function App() {
                  required
           />
           <span className="popup__error" id="input-profession-error"></span>
-          <button
-              type="submit"
-              className="edit-form__button-save"
-          >Сохранить
-          </button
-          >
-        </form>
-    } isOpen={isEditProfilePopupOpen}
+      </>
+    }
+                   buttonText="Сохранить"
+                   isOpen={isEditProfilePopupOpen}
                    onClose={closeAllPopups}
     />
 
      <PopupWithForm title="Новое место" name='add-Form' children={
-       <form name="editForm" className="edit-form" noValidate>
-         <input name="name"
+       <>
+       <input name="name"
                 id="input-name"
                 placeholder="Название"
                 type="text"
@@ -82,20 +78,15 @@ function App() {
                 required
          />
          <span className="popup__error" id="input-link-error"></span>
-         <button
-             type="submit"
-             className="edit-form__button-save"
-         >Создать
-         </button
-         >
-       </form>
+       </>
      }
+                    buttonText="Создать"
                     isOpen={isAddPlacePopupOpen}
                     onClose={closeAllPopups}
      />
 
      <PopupWithForm title="Обновить аватар" name='add-Form' children={
-         <form name="editForm" className="edit-form" noValidate>
+       <>
            <input name="link"
                   id="input-avatar"
                   placeholder="Ссылка на картинку"
@@ -104,26 +95,21 @@ function App() {
                   required
            />
            <span className="popup__error" id="input-avatar-error"></span>
-           <button
-               type="submit"
-               className="edit-form__button-save"
-           >Сохранить
-           </button
-           >
-         </form>
+         </>
      }
+                    buttonText="Сохранить"
                     isOpen={isEditAvatarPopupOpen}
                     onClose={closeAllPopups}
      />
      <PopupWithForm title="Вы уверены?" name='add-Form' children={
-       <form name="editForm" className="edit-form" noValidate>
+      <>
          <button
              type="submit"
              className="edit-form__button-save"
          >Да
          </button
          >
-       </form>
+       </>
      }
                     onClose={closeAllPopups}
      />
