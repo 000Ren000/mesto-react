@@ -11,11 +11,11 @@ export default function Main(
 		}
 ) {
 
-	const [userName, setUserName] = useState();
-	const [userDescription, setUserDescription] = useState();
-	const [userAvatar, setUserAvatar] = useState();
+	const [userName, setUserName] = useState('');
+	const [userDescription, setUserDescription] = useState('');
+	const [userAvatar, setUserAvatar] = useState('');
 	const [cards, setCards] = useState([]);
-	const [myId, setMyId] =useState()
+	const [myId, setMyId] =useState('')
 
 	useEffect(() => {
 		api.getProfileinfo().then((userData) => {
