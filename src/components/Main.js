@@ -1,7 +1,7 @@
-import {useEffect, useState, useContext} from 'react';
-import {api} from '../utils/Api.js';
+import {useContext} from 'react';
 import Cards from './Cards.js';
 import {CurrentUserContext} from '../contexts/CurrentUserContext.js';
+import {CardsContext} from '../contexts/CardsContext.js';
 
 export default function Main(
 		{
@@ -12,28 +12,13 @@ export default function Main(
 		}
 ) {
 
-	const [cards, setCards] = useState([]);
-	const [myId, setMyId] =useState('')
 	const {
 		name:userName,
 		about:userDescription,
 		avatar:userAvatar
 	} = useContext(CurrentUserContext);
 
-
-
-	useEffect(() => {
-		api.getCardInfo().then(data => {
-			setCards(data.map(item => ({
-				likes: item.likes,
-				link: item.link,
-				name: item.name,
-				key: item._id
-			})
-			));
-		})
-				.catch(err => console.log('что-то пошло не так', err));
-	}, []);
+	const cards = useContext(CardsContext)
 
 	return (
 
