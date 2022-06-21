@@ -1,6 +1,7 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useContext} from 'react';
 import {api} from '../utils/Api.js';
 import Cards from './Cards.js';
+import {CurrentUserContext} from '../contexts/CurrentUserContext.js';
 
 export default function Main(
 		{
@@ -11,20 +12,15 @@ export default function Main(
 		}
 ) {
 
-	const [userName, setUserName] = useState('');
-	const [userDescription, setUserDescription] = useState('');
-	const [userAvatar, setUserAvatar] = useState('');
 	const [cards, setCards] = useState([]);
 	const [myId, setMyId] =useState('')
+	const {
+		name:userName,
+		about:userDescription,
+		avatar:userAvatar
+	} = useContext(CurrentUserContext);
 
-	useEffect(() => {
-		api.getProfileinfo().then((userData) => {
-			setUserName(userData.name);
-			setUserDescription(userData.about);
-			setUserAvatar(userData.avatar);
-			setMyId(userData._id);
-		}).catch(err => console.log('что-то пошло не так', err));
-	}, []);
+
 
 	useEffect(() => {
 		api.getCardInfo().then(data => {
