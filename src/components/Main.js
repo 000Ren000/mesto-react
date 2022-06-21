@@ -19,7 +19,6 @@ export default function Main(
 	} = useContext(CurrentUserContext);
 
 	const cards = useContext(CardsContext)
-
 	return (
 
 			<main className="main conteiner">
