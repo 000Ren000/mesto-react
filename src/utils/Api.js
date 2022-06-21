@@ -16,7 +16,13 @@ class Api {
     })
       .then(res => this._checkResponse(res)).then(data => data)
   }
-
+  getUserInfo() {
+    return fetch(this._baseURL+'/users/me', {
+      method: 'GET',
+      headers: this._headers
+    })
+        .then(res => this._checkResponse(res)).then(data => data)
+  }
   getCardInfo() {
     return fetch(this._baseURL+'/cards', {
       method: 'GET',
