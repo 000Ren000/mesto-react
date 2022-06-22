@@ -1,7 +1,8 @@
-import {useContext} from 'react';
+import {useContext, useState} from 'react';
 import Cards from './Cards.js';
 import {CurrentUserContext} from '../contexts/CurrentUserContext.js';
-import {CardsContext} from '../contexts/CardsContext.js';
+import {api} from '../utils/Api.js';
+import {useEffect} from 'react';
 
 export default function Main(
 		{
@@ -13,12 +14,38 @@ export default function Main(
 ) {
 
 	const {
-		name:userName,
-		about:userDescription,
-		avatar:userAvatar
+		name: userName,
+		about: userDescription,
+		avatar: userAvatar,
+		_id: myId
 	} = useContext(CurrentUserContext);
 
-	const cards = useContext(CardsContext)
+	//Получение массива с карточками
+	const [cards, setCards] = useState([]);
+	useEffect(() => {
+		api.getCardInfo().then(data => {
+			setCards(data.map(item => ({
+						likes: item.likes,
+						link: item.link,
+						name: item.name,
+						key: item._id
+					})
+			));
+		})
+				.catch(err => console.log('что-то пошло не так', err));
+	}, []);
+
+
+	function handleCardLike(card) {
+		// Снова проверяем, есть ли уже лайк на этой карточке
+		const isLiked = card.likes.some(i => i.key === myId);
+
+		// Отправляем запрос в API и получаем обновлённые данные карточки
+		api.changeLikeCardStatus(card.key, !isLiked).then((newCard) => {
+			setCards((state) => state.map((c) => c.key === card.key ? newCard : c));
+		});
+	}
+
 	return (
 
 			<main className="main conteiner">
@@ -51,7 +78,12 @@ export default function Main(
 				</section>
 				<section className="photo">
 					<ul className="photo__cards">
-						{cards.map(card => (<Cards card={card} key={card.key} onCardClick={onCardClick} />))}
+						{cards.map(card => (
+								<Cards card={card}
+								       key={card.key}
+								       onCardClick={onCardClick}
+								       onCardLike={handleCardLike}/>)
+						)}
 					</ul>
 				</section>
 			</main>

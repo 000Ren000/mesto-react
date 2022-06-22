@@ -7,7 +7,6 @@ import {useState} from 'react';
 import {useEffect} from 'react';
 import {api} from '../utils/Api.js';
 import {CurrentUserContext} from '../contexts/CurrentUserContext.js'
-import {CardsContext} from '../contexts/CardsContext.js'
 
 function App() {
 
@@ -26,7 +25,7 @@ function App() {
 		setSelectedCard({name: '', link: ''});
 	}
 	const [currentUser, setCurrentUser] = useState({
-		_id: '',
+		myID: '',
 		about: '',
 		avatar: '',
 		cohort: '',
@@ -37,23 +36,10 @@ function App() {
 		).catch(err => console.log('что-то пошло не так', err));
 	}, []);
 
-	const [cards, setCards] = useState([]);
-	useEffect(() => {
-		api.getCardInfo().then(data => {
-			setCards(data.map(item => ({
-						likes: item.likes,
-						link: item.link,
-						name: item.name,
-						key: item._id
-					})
-			));
-		})
-				.catch(err => console.log('что-то пошло не так', err));
-	}, []);
+
 
 	return (
 			<CurrentUserContext.Provider value={currentUser}>
-				<CardsContext.Provider value={cards}>
 					<div className='root'>
 
 						<Header/>
@@ -134,7 +120,6 @@ function App() {
 						<ImagePopup card={selectedCard} onClose={closeAllPopups}/>
 
 					</div>
-				</CardsContext.Provider>
 			</CurrentUserContext.Provider>
 	);
 }

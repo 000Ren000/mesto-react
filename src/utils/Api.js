@@ -72,14 +72,14 @@ class Api {
     }).then(res => this._checkResponse(res));
   }
 
-  likedCard(cardId) {
+  _likedCard(cardId) {
     return fetch(this._baseURL+`/cards/${cardId}/likes`, {
       method: 'PUT',
       headers: this._headers
     }).then(res => this._checkResponse(res));
   }
 
-  unlikedCard(cardId) {
+  _unlikedCard(cardId) {
     return fetch(this._baseURL+`/cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: this._headers
@@ -87,6 +87,9 @@ class Api {
   }
 
 
+	changeLikeCardStatus(cardId, isLiked) {
+    return isLiked ? this._likedCard(cardId) : this._unlikedCard(cardId);
+	}
 }
 
 
