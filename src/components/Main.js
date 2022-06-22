@@ -28,6 +28,7 @@ export default function Main(
 						likes: item.likes,
 						link: item.link,
 						name: item.name,
+						_id: item._id,
 						key: item._id
 					})
 			));
@@ -38,11 +39,11 @@ export default function Main(
 
 	function handleCardLike(card) {
 		// Снова проверяем, есть ли уже лайк на этой карточке
-		const isLiked = card.likes.some(i => i.key === myId);
+		const isLiked = card.likes.some(i => i._id === myId);
 
 		// Отправляем запрос в API и получаем обновлённые данные карточки
-		api.changeLikeCardStatus(card.key, !isLiked).then((newCard) => {
-			setCards((state) => state.map((c) => c.key === card.key ? newCard : c));
+		api.changeLikeCardStatus(card._id, isLiked).then((newCard) => {
+			setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
 		});
 	}
 
