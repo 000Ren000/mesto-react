@@ -19,7 +19,6 @@ export default function Main(
 		avatar: userAvatar,
 		_id: myId
 	} = useContext(CurrentUserContext);
-
 	//Получение массива с карточками
 	const [cards, setCards] = useState([]);
 	useEffect(() => {
@@ -29,7 +28,8 @@ export default function Main(
 						link: item.link,
 						name: item.name,
 						_id: item._id,
-						key: item._id
+						key: item._id,
+						authorCardId:item.owner._id
 					})
 			));
 		})
@@ -47,6 +47,9 @@ export default function Main(
 		});
 	}
 
+	function handleCardDelete () {
+
+	}
 	return (
 
 			<main className="main conteiner">
@@ -83,7 +86,9 @@ export default function Main(
 								<Cards card={card}
 								       key={card.key}
 								       onCardClick={onCardClick}
-								       onCardLike={handleCardLike}/>)
+								       onCardLike={handleCardLike}
+								       onCardDelete={handleCardDelete}
+								/>)
 						)}
 					</ul>
 				</section>
