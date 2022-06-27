@@ -2,6 +2,7 @@ import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js'
+import EditProfilePopup from './EditProfilePopup.js';
 import ImagePopup from './ImagePopup.js';
 import {useState} from 'react';
 import {useEffect} from 'react';
@@ -50,29 +51,7 @@ function App() {
 						      onCardClick={setSelectedCard}
 						/>
 						<Footer/>
-						<PopupWithForm title="Редактировать профиль" name='edit-form'
-						               buttonText="Сохранить"
-						               isOpen={isEditProfilePopupOpen}
-						               onClose={closeAllPopups}>
-							<input name="name"
-							       type="text"
-							       className="edit-form__input edit-form__input_type_name"
-							       id="input-profile-name"
-							       minLength="2"
-							       maxLength="40"
-							       required
-							/>
-							<span className="popup__error" id="input-profile-name-error"></span>
-							<input name="about"
-							       type="text"
-							       className="edit-form__input edit-form__input_type_profession"
-							       id="input-profession"
-							       minLength="2"
-							       maxLength="200"
-							       required
-							/>
-							<span className="popup__error" id="input-profession-error"></span>
-						</PopupWithForm>
+						<EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
 
 						<PopupWithForm title="Новое место" name='add-Form'
 						               buttonText="Создать"
