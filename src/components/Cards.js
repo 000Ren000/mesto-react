@@ -14,7 +14,6 @@ export default function (props) {
 		props.onCardDelete(props.card);
 	}
 	const currentUser = useContext(CurrentUserContext);
-	console.log(props.card);
 	// Определяем, являемся ли мы владельцем текущей карточки
 	const isOwn = authorCardId === currentUser._id;
 // Создаём переменную, которую после зададим в `className` для кнопки удаления
@@ -38,7 +37,9 @@ export default function (props) {
 							<span className="card__like-counter">{likeCounter}</span>
 						</div>
 					</div>
-					<button className={`${cardDeleteButtonClassName} link`}></button>
+					<button className={`${cardDeleteButtonClassName} link`}
+					        onClick={handleDeleteClick}
+					></button>
 				</li>
 	)
 }

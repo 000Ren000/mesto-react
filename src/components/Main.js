@@ -47,7 +47,10 @@ export default function Main(
 		});
 	}
 
-	function handleCardDelete () {
+	function handleCardDelete (card) {
+		api.deleteCard(card._id).then (newCard => {
+			setCards((state) => state.filter(c => c._id !== card._id))
+		})
 
 	}
 	return (
