@@ -8,6 +8,7 @@ import {useState} from 'react';
 import {useEffect} from 'react';
 import {api} from '../utils/Api.js';
 import {CurrentUserContext} from '../contexts/CurrentUserContext.js'
+import EditAvatarPopup from './EditAvatarPopup.js';
 
 function App() {
 
@@ -39,6 +40,10 @@ function App() {
 
 	const handleUpdateUser = (data) => {
 		api.setUserInfo(data).then(setCurrentUser)
+				.catch(err => console.log('что-то пошло не так', err));
+	}
+	const handleUpdateAvatar = (data) => {
+		api.changeAvatar(data.avatar).then(setCurrentUser)
 				.catch(err => console.log('что-то пошло не так', err));
 	}
 
@@ -82,19 +87,11 @@ function App() {
 							<span className="popup__error" id="input-link-error"></span>
 						</PopupWithForm>
 
-						<PopupWithForm title="Обновить аватар" name='add-Form'
-						               buttonText="Сохранить"
-						               isOpen={isEditAvatarPopupOpen}
-						               onClose={closeAllPopups}>
-							<input name="link"
-							       id="input-avatar"
-							       placeholder="Ссылка на картинку"
-							       type="url"
-							       className="edit-form__input edit-form__input_type_link"
-							       required
-							/>
-							<span className="popup__error" id="input-avatar-error"></span>
-						</PopupWithForm>
+						<EditAvatarPopup isOpen={isEditAvatarPopupOpen}
+						                 onClose={closeAllPopups}
+						                 onUpdateAvatar={handleUpdateAvatar}
+						/>
+
 
 						<PopupWithForm title="Вы уверены?" name='add-Form'
 						               onClose={closeAllPopups}
