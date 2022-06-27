@@ -31,7 +31,7 @@ class Api {
       .then(res => this._checkResponse(res));
   }
 
-  setProfileInfo({name, about}) {
+  setUserInfo({name, about}) {
     return fetch(this._baseURL+'/users/me', {
       method: 'PATCH',
       headers: this._headers,

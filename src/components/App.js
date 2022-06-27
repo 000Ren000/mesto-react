@@ -37,7 +37,10 @@ function App() {
 		).catch(err => console.log('что-то пошло не так', err));
 	}, []);
 
-
+	const handleUpdateUser = (data) => {
+		api.setUserInfo(data).then(setCurrentUser)
+				.catch(err => console.log('что-то пошло не так', err));
+	}
 
 	return (
 			<CurrentUserContext.Provider value={currentUser}>
@@ -51,7 +54,9 @@ function App() {
 						      onCardClick={setSelectedCard}
 						/>
 						<Footer/>
-						<EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+						<EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}
+						                  onUpdateUser={handleUpdateUser}
+						/>
 
 						<PopupWithForm title="Новое место" name='add-Form'
 						               buttonText="Создать"
