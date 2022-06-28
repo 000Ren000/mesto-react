@@ -52,14 +52,7 @@ function App() {
 	const [cards, setCards] = useState([]);
 	useEffect(() => {
 		api.getCardInfo().then(data => {
-			setCards(data.map(item => ({
-						likes: item.likes,
-						link: item.link,
-						name: item.name,
-						_id: item._id,
-						key: item._id,
-						owner: item.owner
-					})
+			setCards(data.map(item => ({...item, key: item._id})
 			));
 		})
 				.catch(err => console.log('что-то пошло не так', err));
@@ -73,7 +66,8 @@ function App() {
 		// Отправляем запрос в API и получаем обновлённые данные карточки
 		api.changeLikeCardStatus(card._id, isLiked).then((newCard) => {
 			setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-		});
+		})
+				.catch(err => console.log('что-то пошло не так', err));
 	}
 
 	function handleAddPlaceSubmit (data) {
