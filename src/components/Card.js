@@ -1,7 +1,7 @@
 import {useContext} from 'react';
 import {CurrentUserContext} from '../contexts/CurrentUserContext.js';
 
-export default function (props) {
+export default function Card (props) {
 	const {name, link, likes, owner} = props.card;
 	const likeCounter = likes.length;
 	const handleCardClick = () => {

@@ -1,5 +1,5 @@
 import {useContext, useState} from 'react';
-import Cards from './Cards.js';
+import Cards from './Card.js';
 import {CurrentUserContext} from '../contexts/CurrentUserContext.js';
 
 export default function Main(
