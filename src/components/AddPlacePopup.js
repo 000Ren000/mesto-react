@@ -1,5 +1,5 @@
 import PopupWithForm from './PopupWithForm.js';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 export default function (
 		{
@@ -8,8 +8,11 @@ export default function (
 			onAddPlace
 		}) {
 	const [name, setName] = useState('');
-	const [link, setLink] = useState('')
-
+	const [link, setLink] = useState('');
+	useEffect(() => {
+		setName('');
+		setLink('');
+	}, [isOpen])
 	function handleChangeName(e) {
 		setName(e.target.value);
 	}
@@ -39,6 +42,7 @@ export default function (
 				       maxLength="30"
 				       required
 				       onChange={handleChangeName}
+				       value={name}
 				/>
 				<span className="popup__error" id="input-name-error"></span>
 				<input name="link"
@@ -48,6 +52,7 @@ export default function (
 				       className="edit-form__input edit-form__input_type_link"
 				       required
 				       onChange={handleChangeLink}
+				       value={link}
 				/>
 				<span className="popup__error" id="input-link-error"></span>
 			</PopupWithForm>
