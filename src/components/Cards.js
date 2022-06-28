@@ -2,7 +2,7 @@ import {useContext} from 'react';
 import {CurrentUserContext} from '../contexts/CurrentUserContext.js';
 
 export default function (props) {
-	const {name, link, likes, authorCardId} = props.card;
+	const {name, link, likes, owner} = props.card;
 	const likeCounter = likes.length;
 	const handleCardClick = () => {
 		props.onCardClick(props.card);
@@ -15,8 +15,7 @@ export default function (props) {
 	}
 	const currentUser = useContext(CurrentUserContext);
 	// Определяем, являемся ли мы владельцем текущей карточки
-	const isOwn = authorCardId === currentUser._id;
-// Создаём переменную, которую после зададим в `className` для кнопки удаления
+	const isOwn = owner._id === currentUser._id;
 	const cardDeleteButtonClassName = (`card__trash ${isOwn ? '' : 'card__trash_hidden'}`);
 
 	//Проверка на наш лайк

@@ -9,13 +9,7 @@ class Api {
     if (res.ok) return res.json();
     else return Promise.reject(`Ошибка: ${res.status}`);
   }
-  getProfileinfo() {
-    return fetch(this._baseURL+'/users/me', {
-      method: 'GET',
-      headers: this._headers
-    })
-      .then(res => this._checkResponse(res)).then(data => data)
-  }
+
   getUserInfo() {
     return fetch(this._baseURL+'/users/me', {
       method: 'GET',

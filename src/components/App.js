@@ -9,6 +9,7 @@ import {useEffect} from 'react';
 import {api} from '../utils/Api.js';
 import {CurrentUserContext} from '../contexts/CurrentUserContext.js'
 import EditAvatarPopup from './EditAvatarPopup.js';
+import AddPlacePopup from './AddPlacePopup.js';
 
 function App() {
 
@@ -57,7 +58,7 @@ function App() {
 						name: item.name,
 						_id: item._id,
 						key: item._id,
-						authorCardId:item.owner._id
+						owner: item.owner
 					})
 			));
 		})
@@ -75,6 +76,12 @@ function App() {
 		});
 	}
 
+	function handleAddPlaceSubmit (data) {
+		api.setNewCardInfo(data).then(newCard => {
+			setCards([newCard, ...cards])
+		})
+				.catch(err => console.log('что-то пошло не так', err));
+	}
 	function handleCardDelete (card) {
 		api.deleteCard(card._id).then (newCard => {
 			setCards((state) => state.filter(c => c._id !== card._id))
@@ -100,29 +107,10 @@ function App() {
 						                  onUpdateUser={handleUpdateUser}
 						/>
 
-						<PopupWithForm title="Новое место" name='add-Form'
-						               buttonText="Создать"
-						               isOpen={isAddPlacePopupOpen}
-						               onClose={closeAllPopups}>
-							<input name="name"
-							       id="input-name"
-							       placeholder="Название"
-							       type="text"
-							       className="edit-form__input edit-form__input_type_name "
-							       minLength="2"
-							       maxLength="30"
-							       required
-							/>
-							<span className="popup__error" id="input-name-error"></span>
-							<input name="link"
-							       id="input-link"
-							       placeholder="Ссылка на картинку"
-							       type="url"
-							       className="edit-form__input edit-form__input_type_link"
-							       required
-							/>
-							<span className="popup__error" id="input-link-error"></span>
-						</PopupWithForm>
+						<AddPlacePopup isOpen={isAddPlacePopupOpen}
+						               onClose={closeAllPopups}
+						               onAddPlace={handleAddPlaceSubmit}
+						/>
 
 						<EditAvatarPopup isOpen={isEditAvatarPopupOpen}
 						                 onClose={closeAllPopups}

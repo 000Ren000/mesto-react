@@ -1,8 +1,6 @@
 import {useContext, useState} from 'react';
 import Cards from './Cards.js';
 import {CurrentUserContext} from '../contexts/CurrentUserContext.js';
-import {api} from '../utils/Api.js';
-import {useEffect} from 'react';
 
 export default function Main(
 		{
@@ -57,7 +55,7 @@ export default function Main(
 					<ul className="photo__cards">
 						{cards.map(card => (
 								<Cards card={card}
-								       key={card.key}
+								       key={card._id}
 								       onCardClick={onCardClick}
 								       onCardLike={onCardLike}
 								       onCardDelete={onCardDelete}
