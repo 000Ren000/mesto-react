@@ -80,7 +80,7 @@ function App() {
 		api.deleteCard(card._id).then (newCard => {
 			setCards((state) => state.filter(c => c._id !== card._id))
 		})
-
+				.catch(err => console.log('что-то пошло не так', err));
 	}
 	return (
 			<CurrentUserContext.Provider value={currentUser}>
